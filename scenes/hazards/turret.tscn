@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://ihjinxjyvl81"]
+
+[ext_resource type="Texture2D" uid="uid://dyvxhomsedyum" path="res://assets/images/hazards/turret.png" id="1_oi2yv"]
+[ext_resource type="Script" path="res://scripts/turret.gd" id="2_2wj6m"]
+[ext_resource type="PackedScene" uid="uid://3m7ow0rqjl8r" path="res://scenes/hazards/projectile.tscn" id="3_1le7e"]
+
+[node name="Turret" type="Sprite2D"]
+texture = ExtResource("1_oi2yv")
+offset = Vector2(-4.5, -6)
+script = ExtResource("2_2wj6m")
+projectile = ExtResource("3_1le7e")
+
+[node name="ShootPoint" type="Node2D" parent="."]
+position = Vector2(-7, -6)
+
+[node name="ShootTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6dbxjuvp3j00"]
+
+[ext_resource type="Texture2D" uid="uid://dyvxhomsedyum" path="res://assets/images/hazards/turret.png" id="1_qyq1v"]
+[ext_resource type="Script" path="res://scripts/turret.gd" id="2_xt0o5"]
+[ext_resource type="PackedScene" uid="uid://3m7ow0rqjl8r" path="res://scenes/hazards/projectile.tscn" id="3_45xvo"]
+
+[node name="FlippedTurret" type="Sprite2D"]
+position = Vector2(9, 0)
+texture = ExtResource("1_qyq1v")
+offset = Vector2(-4.5, -6)
+flip_h = true
+script = ExtResource("2_xt0o5")
+projectile = ExtResource("3_45xvo")
+flipped = true
+
+[node name="ShootPoint" type="Node2D" parent="."]
+position = Vector2(-2, -6)
+
+[node name="ShootTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

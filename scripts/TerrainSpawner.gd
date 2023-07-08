@@ -1,12 +1,28 @@
 extends Node2D
 
-@export var blocks: Array[PackedScene] 
+@export var blocks: Array[PackedScene]
+
+@onready var player = $"../Player"
+
+var BLOCK_REMOVE_DIST := 1000.0
+var BLOCK_SPAWN_DIST := 200.0
+var nextSpawnY: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	nextSpawnY = get_child(0).getTilemapHeight()
+	randomize()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _process(_delta):
+	var current_blocks = get_children()
+	for block in current_blocks:
+		# remove block if too far from player
+		if player.position.y - block.position.y > BLOCK_REMOVE_DIST:
+			block.queue_free()
+	if nextSpawnY - player.position.y < BLOCK_SPAWN_DIST:
+		var randomBlock = blocks[randi() % blocks.size()]
+		var blockInstance = randomBlock.instantiate()
+		add_child(blockInstance)
+		blockInstance.position.y = nextSpawnY
+		nextSpawnY += blockInstance.getTilemapHeight()

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7yv7o1ky2au7"]
+[gd_scene load_steps=5 format=3 uid="uid://c7yv7o1ky2au7"]
 
 [ext_resource type="Texture2D" uid="uid://dnnsbfnatx1sl" path="res://assets/images/rock_packed.png" id="1_87lt2"]
+[ext_resource type="Script" path="res://scripts/block.gd" id="1_jia2k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_swf81"]
 texture = ExtResource("1_87lt2")
@@ -150,6 +151,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_swf81")
 
 [node name="Block3" type="Node2D"]
+script = ExtResource("1_jia2k")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_nlqiw")

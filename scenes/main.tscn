@@ -1,15 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://drh7y8f4atts5"]
+[gd_scene load_steps=8 format=3 uid="uid://drh7y8f4atts5"]
 
 [ext_resource type="Script" path="res://scripts/TerrainSpawner.gd" id="1_ikakl"]
 [ext_resource type="Texture2D" uid="uid://cxiuxbpe2a8r4" path="res://assets/images/background.png" id="1_t04jk"]
 [ext_resource type="PackedScene" uid="uid://dgykpeao1xlxn" path="res://scenes/blocks/block_1.tscn" id="2_07cnu"]
 [ext_resource type="PackedScene" uid="uid://chm0ui4tibe3" path="res://scenes/blocks/block_2.tscn" id="3_0y0qq"]
 [ext_resource type="PackedScene" uid="uid://c7yv7o1ky2au7" path="res://scenes/blocks/block_3.tscn" id="4_2obai"]
+[ext_resource type="PackedScene" uid="uid://bkflkgjapfywh" path="res://scenes/blocks/block_0.tscn" id="6_8184x"]
 [ext_resource type="PackedScene" uid="uid://8ftv3kwsnq6d" path="res://scenes/player.tscn" id="6_wbp2b"]
 
 [node name="Main" type="Node2D"]
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -128
+
+[node name="Background" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(198, 117)
 texture = ExtResource("1_t04jk")
 
@@ -17,7 +21,13 @@ texture = ExtResource("1_t04jk")
 script = ExtResource("1_ikakl")
 blocks = Array[PackedScene]([ExtResource("2_07cnu"), ExtResource("3_0y0qq"), ExtResource("4_2obai")])
 
-[node name="Block1" parent="TerrainSpawner" instance=ExtResource("2_07cnu")]
+[node name="Block0" parent="TerrainSpawner" instance=ExtResource("6_8184x")]
 
 [node name="Player" parent="." instance=ExtResource("6_wbp2b")]
 position = Vector2(112, 40)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+offset = Vector2(2.08165e-12, 80)
+limit_left = 0
+limit_right = 396
+position_smoothing_enabled = true

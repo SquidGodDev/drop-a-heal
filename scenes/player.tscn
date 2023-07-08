@@ -153,7 +153,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 13
+collision_mask = 45
 script = ExtResource("1_7dt1v")
 
 [node name="Parachute" type="Sprite2D" parent="."]
@@ -184,4 +184,9 @@ libraries = {
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.1
 
+[node name="HitFlashTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="HitFlashTimer" to="." method="_on_hit_flash_timer_timeout"]

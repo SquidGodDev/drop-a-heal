@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 signal healthChanged(amount)
 signal energyChanged(amount)
+signal addCoin(amount)
+signal hitFlash
 
 @onready var gameData: GameData = get_node("/root/GameData")
 
@@ -13,8 +15,10 @@ signal energyChanged(amount)
 
 @onready var energyDrainSpeed = gameData.energyDrainSpeed
 
+@onready var fallDamageMinimum = gameData.fallDamageMinimum
 @onready var fallDamageSpeed = gameData.fallDamageSpeed
 @onready var fallDamageScaling = gameData.fallDamageScaling
+@onready var coinsPerHeal = gameData.coinsPerHeal
 
 const SPEED = 100.0
 const ACCELERATION = 15.0
@@ -38,7 +42,7 @@ func _physics_process(delta):
 			coyoteTimeActive = true
 			justLeftGround = true
 			if lastVelocity >= fallDamageSpeed:
-				var fallDamage = (lastVelocity - fallDamageSpeed) * fallDamageScaling
+				var fallDamage = fallDamageMinimum + (lastVelocity - fallDamageSpeed) * fallDamageScaling
 				damage(fallDamage)
 		$CoyoteTimer.stop()
 		if $Parachute.visible and not Input.is_action_pressed("jump"):
@@ -81,15 +85,31 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _process(delta):
-	energy -= delta * energyDrainSpeed
+	removeEnergy(delta * energyDrainSpeed)
+
+func addEnergy(amount):
+	updateEnergy(energy + amount)
+	
+func removeEnergy(amount):
+	updateEnergy(energy - amount)
+	
+func updateEnergy(newEnergy):
+	energy = newEnergy
+	if energy >= maxEnergy:
+		energy = maxEnergy
 	energyChanged.emit(energy)
 	if energy <= 0:
 		endRun()
-		pass
+
+func npcHealed():
+	addCoin.emit(coinsPerHeal)
 
 func damage(amount):
 	health -= amount
 	healthChanged.emit(health)
+	hitFlash.emit()
+	$PlayerSprite.self_modulate = Color(1, 0, 0, 1)
+	$HitFlashTimer.start()
 	if health <= 0:
 		endRun()
 
@@ -99,3 +119,6 @@ func endRun():
 
 func _on_coyote_timer_timeout():
 	coyoteTimeActive = false
+
+func _on_hit_flash_timer_timeout():
+	$PlayerSprite.self_modulate = Color(1, 1, 1, 1)

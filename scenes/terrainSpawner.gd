@@ -9,8 +9,8 @@ var blocks = [
 
 @onready var player = $"../Player"
 
-var BLOCK_REMOVE_DIST := 1000.0
-var BLOCK_SPAWN_DIST := 200.0
+const BLOCK_REMOVE_DIST := 1000.0
+const BLOCK_SPAWN_DIST := 200.0
 var nextSpawnY: float
 
 # Called when the node enters the scene tree for the first time.

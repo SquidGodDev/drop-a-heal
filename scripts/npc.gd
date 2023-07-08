@@ -4,7 +4,7 @@ extends Area2D
 
 @onready var playerHealSpeed = get_node("/root/GameData").healSpeed
 
-var touchingPlayer := false
+var player
 var HEAL_MAX := 100.0
 var healValue := 0.0
 var healed := false
@@ -22,7 +22,7 @@ func _ready():
 func _process(delta):
 	if healed:
 		return
-	if touchingPlayer:
+	if player:
 		if Input.is_action_pressed("down"):
 			$ActionInputPopup.visible = false
 			$ProgressBar.visible = true
@@ -33,16 +33,17 @@ func _process(delta):
 				$AnimationPlayer.play("healed")
 				$ActionInputPopup.visible = false
 				$ProgressBar.visible = false
+				player.npcHealed()
 		else:
 			$ActionInputPopup.visible = true
 			$ProgressBar.visible = false
 
 func _on_body_entered(body):
 	if body.name == "Player":
-		touchingPlayer = true
+		player = body
 
 func _on_body_exited(body):
 	if body.name == "Player":
-		touchingPlayer = false
+		player = null
 		$ActionInputPopup.visible = false
 		$ProgressBar.visible = false

@@ -7,7 +7,7 @@ var player_body
 
 func _on_detection_area_body_entered(body):
 	if body.name == "Player":
-		$DetectionArea.monitoring = false
+		$DetectionArea.set_deferred("monitoring", false)
 		$ExplosionTimer.start(EXPLOSION_WAIT_TIME)
 		$FuseParticles.emitting = true
 

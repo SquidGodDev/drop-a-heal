@@ -11,7 +11,6 @@ var healed := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	randomize()
 	var randomSprite = npcSprites[randi() % npcSprites.size()]
 	$Sprite2D.texture = randomSprite
 	$ActionInputPopup.visible = false

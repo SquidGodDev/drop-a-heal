@@ -1,0 +1,80 @@
+[gd_scene load_steps=8 format=3 uid="uid://3uyanmlo5o5q"]
+
+[ext_resource type="Script" path="res://scripts/cactus.gd" id="1_j5ko1"]
+[ext_resource type="Texture2D" uid="uid://ghtgls1i0iff" path="res://assets/images/hazards/circle.png" id="1_r1q3x"]
+[ext_resource type="Texture2D" uid="uid://dg3bf0cpp6cgu" path="res://assets/images/enemies/cactus.png" id="2_g7v6b"]
+
+[sub_resource type="Curve" id="Curve_e75s2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_njoyr"]
+radius = 10.0
+height = 36.0
+
+[sub_resource type="Animation" id="Animation_ovxaw"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cactus:skew")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.174533, 0.174533, -0.174533]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y0g3g"]
+_data = {
+"idle": SubResource("Animation_ovxaw")
+}
+
+[node name="Cactus" type="Node2D"]
+script = ExtResource("1_j5ko1")
+
+[node name="Cactus" type="Sprite2D" parent="."]
+texture = ExtResource("2_g7v6b")
+offset = Vector2(9, -9)
+
+[node name="SpikeParticles" type="CPUParticles2D" parent="."]
+position = Vector2(9, -4)
+emitting = false
+amount = 16
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.92
+texture = ExtResource("1_r1q3x")
+direction = Vector2(2.08165e-12, -1)
+spread = 90.0
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 80.0
+initial_velocity_max = 80.0
+scale_amount_curve = SubResource("Curve_e75s2")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(9, -10)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_njoyr")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_y0g3g")
+}
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgykpeao1xlxn"]
+[gd_scene load_steps=7 format=3 uid="uid://dgykpeao1xlxn"]
 
 [ext_resource type="Script" path="res://scripts/block.gd" id="1_56meq"]
 [ext_resource type="Texture2D" uid="uid://dnnsbfnatx1sl" path="res://assets/images/rock_packed.png" id="1_yl4pd"]
 [ext_resource type="PackedScene" uid="uid://qutn54eiw6v2" path="res://scenes/npc.tscn" id="3_r1wpa"]
+[ext_resource type="PackedScene" uid="uid://bcht67vfdl0h5" path="res://scenes/enemies/bat.tscn" id="4_if41g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_swf81"]
 texture = ExtResource("1_yl4pd")
@@ -166,3 +167,6 @@ position = Vector2(270, 126)
 
 [node name="NPC2" parent="." instance=ExtResource("3_r1wpa")]
 position = Vector2(108, 288)
+
+[node name="Bat" parent="." instance=ExtResource("4_if41g")]
+position = Vector2(288, 72)

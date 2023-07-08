@@ -6,3 +6,6 @@ var maxHealth := 50.0
 var maxEnergy := 50.0
 var fallDamageSpeed := 300.0
 var fallDamageScaling := 0.02
+
+func _ready():
+	randomize()

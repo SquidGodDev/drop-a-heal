@@ -16,7 +16,6 @@ var nextSpawnY: float
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	nextSpawnY = get_child(0).getTilemapHeight()
-	randomize()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

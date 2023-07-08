@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=3 uid="uid://dhgijp02y4kot"]
+
+[ext_resource type="Texture2D" uid="uid://cmj3elgjnkwla" path="res://assets/images/enemies/cyclops.png" id="1_oaoa6"]
+[ext_resource type="Script" path="res://scripts/cyclops.gd" id="1_yi0n5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p5ht1"]
+size = Vector2(16, 16)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2uuot"]
+radius = 4.5
+height = 16.0
+
+[sub_resource type="Animation" id="Animation_wssev"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.0872665, 0.0872665, -0.0872665]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.795063),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 0.9), Vector2(1, 1), Vector2(1, 0.9), Vector2(1, 1), Vector2(1, 0.9)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jd6vk"]
+_data = {
+"walk": SubResource("Animation_wssev")
+}
+
+[node name="Cyclops" type="CharacterBody2D"]
+collision_layer = 16
+script = ExtResource("1_yi0n5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(9, 0)
+texture = ExtResource("1_oaoa6")
+offset = Vector2(0, -9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(9, -8)
+shape = SubResource("RectangleShape2D_p5ht1")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(9, -4.5)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_2uuot")
+
+[node name="RightRayCast" type="RayCast2D" parent="."]
+position = Vector2(17, -8)
+target_position = Vector2(0, 15)
+
+[node name="LeftRayCast" type="RayCast2D" parent="."]
+position = Vector2(1, -8)
+target_position = Vector2(0, 15)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "walk"
+libraries = {
+"": SubResource("AnimationLibrary_jd6vk")
+}
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

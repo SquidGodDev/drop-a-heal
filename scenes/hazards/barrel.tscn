@@ -1,0 +1,93 @@
+[gd_scene load_steps=8 format=3 uid="uid://brcrb5xslrokn"]
+
+[ext_resource type="Script" path="res://scripts/barrel.gd" id="1_q58tt"]
+[ext_resource type="Texture2D" uid="uid://ccb75k8ipijv2" path="res://assets/images/hazards/barrel.png" id="1_t2ove"]
+[ext_resource type="Texture2D" uid="uid://ghtgls1i0iff" path="res://assets/images/hazards/circle.png" id="2_uoahn"]
+
+[sub_resource type="Curve" id="Curve_v68ar"]
+_data = [Vector2(0.00757932, 0.484118), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cakbf"]
+size = Vector2(44, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_20baa"]
+size = Vector2(44, 28)
+
+[sub_resource type="Curve" id="Curve_e5ulm"]
+_data = [Vector2(0, 1), 0.0, -2.1428, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Barrel" type="Node2D"]
+script = ExtResource("1_q58tt")
+
+[node name="FuseParticles" type="CPUParticles2D" parent="."]
+position = Vector2(9, -16)
+emitting = false
+amount = 16
+texture = ExtResource("2_uoahn")
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector2(2.08165e-12, -1)
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+damping_min = 46.07
+damping_max = 46.07
+scale_amount_curve = SubResource("Curve_v68ar")
+color = Color(1, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_t2ove")
+offset = Vector2(9, -7)
+
+[node name="DetectionArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(9, -14)
+shape = SubResource("RectangleShape2D_cakbf")
+
+[node name="ExplosionArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea"]
+position = Vector2(9, -14)
+shape = SubResource("RectangleShape2D_20baa")
+debug_color = Color(0.701961, 0, 0.0235294, 0.419608)
+
+[node name="ExplosionTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ExplosionParticles" type="CPUParticles2D" parent="."]
+position = Vector2(9, -6)
+emitting = false
+amount = 64
+one_shot = true
+explosiveness = 1.0
+randomness = 0.63
+lifetime_randomness = 0.51
+texture = ExtResource("2_uoahn")
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector2(2.08165e-12, -1)
+spread = 95.52
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+tangential_accel_min = -17.42
+tangential_accel_max = 16.77
+damping_min = 150.0
+damping_max = 150.0
+scale_amount_min = 0.3
+scale_amount_curve = SubResource("Curve_e5ulm")
+color = Color(1, 0.117647, 0, 1)
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_entered" from="ExplosionArea" to="." method="_on_explosion_area_body_entered"]
+[connection signal="body_exited" from="ExplosionArea" to="." method="_on_explosion_area_body_exited"]
+[connection signal="timeout" from="ExplosionTimer" to="." method="_on_explosion_timer_timeout"]

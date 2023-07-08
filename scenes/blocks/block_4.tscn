@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3wljtwika5ev"]
+[gd_scene load_steps=9 format=3 uid="uid://c3wljtwika5ev"]
 
 [ext_resource type="Script" path="res://scripts/block.gd" id="1_ou8m0"]
 [ext_resource type="Texture2D" uid="uid://dnnsbfnatx1sl" path="res://assets/images/rock_packed.png" id="2_fclac"]
 [ext_resource type="PackedScene" uid="uid://ihjinxjyvl81" path="res://scenes/hazards/turret.tscn" id="3_d235v"]
+[ext_resource type="PackedScene" uid="uid://2hpjregdbjgy" path="res://scenes/hazards/spike3.tscn" id="3_lkms3"]
 [ext_resource type="PackedScene" uid="uid://b6dbxjuvp3j00" path="res://scenes/hazards/flippedTurret.tscn" id="4_mbvhe"]
+[ext_resource type="PackedScene" uid="uid://brcrb5xslrokn" path="res://scenes/hazards/barrel.tscn" id="5_267hg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_swf81"]
 texture = ExtResource("2_fclac")
@@ -163,7 +165,13 @@ format = 2
 layer_0/tile_data = PackedInt32Array(4, 458752, 1, 65540, 458752, 1, 131076, 458752, 1, 196612, 458752, 1, 786436, 458752, 1, 262148, 458752, 1, 327684, 458752, 1, 393220, 458752, 1, 458756, 458752, 1, 524292, 458752, 1, 589828, 458752, 1, 655364, 458752, 1, 720900, 458752, 1, 17, 458752, 1, 65553, 458752, 1, 786449, 458752, 1, 720913, 458752, 1, 655377, 458752, 1, 589841, 458752, 1, 524305, 458752, 1, 458769, 458752, 1, 393233, 458752, 1, 327697, 458752, 1, 262161, 458752, 1, 196625, 458752, 1, 131089, 458752, 1, 851972, 458752, 1, 917508, 458752, 1, 983044, 458752, 1, 1048580, 458752, 1, 1114116, 458752, 1, 1179652, 458752, 1, 1245188, 458752, 1, 1310724, 458752, 1, 1376260, 458752, 1, 851985, 458752, 1, 917521, 458752, 1, 983057, 458752, 1, 1048593, 458752, 1, 1114129, 458752, 1, 1179665, 458752, 1, 1245201, 458752, 1, 1310737, 458752, 1, 1376273, 458752, 1, 1441809, 458752, 1, 1507345, 458752, 1, 1572881, 458752, 1, 1638417, 458752, 1, 1703953, 458752, 1, 1769489, 458752, 1, 1835025, 458752, 1, 1900561, 458752, 1, 1966097, 458752, 1, 2031633, 458752, 1, 2097169, 458752, 1, 2162705, 458752, 1, 2228241, 458752, 1, 2293777, 458752, 1, 2359313, 458752, 1, 2424849, 458752, 1, 1441796, 458752, 1, 1507332, 458752, 1, 1572868, 458752, 1, 1638404, 458752, 1, 1703940, 458752, 1, 1769476, 458752, 1, 1835012, 458752, 1, 1900548, 458752, 1, 1966084, 458752, 1, 2031620, 458752, 1, 2097156, 458752, 1, 2162692, 458752, 1, 2228228, 458752, 1, 2293764, 458752, 1, 2359300, 458752, 1, 2424836, 458752, 1, 655365, 196608, 0, 655366, 196608, 0, 655367, 196608, 0, 655368, 196608, 0, 1769488, 196608, 0, 1769487, 196608, 0, 1769486, 196608, 0, 1769485, 196608, 0, 2293765, 196608, 0, 2293766, 196608, 0, 2293767, 196608, 0, 2293768, 196608, 0)
 
 [node name="Turret" parent="." instance=ExtResource("3_d235v")]
-position = Vector2(306, 141)
+position = Vector2(306, 144)
 
 [node name="FlippedTurret" parent="." instance=ExtResource("4_mbvhe")]
-position = Vector2(99, 285)
+position = Vector2(90, 288)
+
+[node name="Barrel" parent="." instance=ExtResource("5_267hg")]
+position = Vector2(108, 180)
+
+[node name="Spike3" parent="." instance=ExtResource("3_lkms3")]
+position = Vector2(252, 486)

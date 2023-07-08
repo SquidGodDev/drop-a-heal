@@ -1,12 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://drh7y8f4atts5"]
+[gd_scene load_steps=14 format=3 uid="uid://drh7y8f4atts5"]
 
 [ext_resource type="Script" path="res://scripts/TerrainSpawner.gd" id="1_ikakl"]
 [ext_resource type="Texture2D" uid="uid://cxiuxbpe2a8r4" path="res://assets/images/background.png" id="1_t04jk"]
-[ext_resource type="PackedScene" uid="uid://dgykpeao1xlxn" path="res://scenes/blocks/block_1.tscn" id="2_07cnu"]
-[ext_resource type="PackedScene" uid="uid://chm0ui4tibe3" path="res://scenes/blocks/block_2.tscn" id="3_0y0qq"]
-[ext_resource type="PackedScene" uid="uid://c7yv7o1ky2au7" path="res://scenes/blocks/block_3.tscn" id="4_2obai"]
 [ext_resource type="PackedScene" uid="uid://bkflkgjapfywh" path="res://scenes/blocks/block_0.tscn" id="6_8184x"]
-[ext_resource type="PackedScene" uid="uid://c3wljtwika5ev" path="res://scenes/blocks/block_4.tscn" id="6_qvypt"]
 [ext_resource type="PackedScene" uid="uid://8ftv3kwsnq6d" path="res://scenes/player.tscn" id="6_wbp2b"]
 [ext_resource type="Script" path="res://scripts/healthBar.gd" id="8_jqolc"]
 [ext_resource type="Texture2D" uid="uid://cm2uou1w00067" path="res://assets/images/ui/whitePixel.png" id="8_nu01b"]
@@ -41,7 +37,6 @@ texture = ExtResource("1_t04jk")
 
 [node name="TerrainSpawner" type="Node2D" parent="."]
 script = ExtResource("1_ikakl")
-blocks = Array[PackedScene]([ExtResource("2_07cnu"), ExtResource("3_0y0qq"), ExtResource("4_2obai"), ExtResource("6_qvypt")])
 
 [node name="Block0" parent="TerrainSpawner" instance=ExtResource("6_8184x")]
 

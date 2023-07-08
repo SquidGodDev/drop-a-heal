@@ -1,6 +1,11 @@
 extends Node2D
 
-@export var blocks: Array[PackedScene]
+var blocks = [
+	preload("res://scenes/blocks/block_1.tscn"),
+	preload("res://scenes/blocks/block_2.tscn"),
+	preload("res://scenes/blocks/block_3.tscn"),
+	preload("res://scenes/blocks/block_4.tscn"),
+]
 
 @onready var player = $"../Player"
 

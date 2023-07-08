@@ -21,22 +21,10 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("Sprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -2)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -50,34 +38,22 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
-tracks/0/interp = 1
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.3, 0.5, 0.7, 0.9, 1, 1.2, 1.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(2.08165e-12, -3), Vector2(2.08165e-12, -10), Vector2(2.08165e-12, -10), Vector2(2.08165e-12, -3), Vector2(2.08165e-12, -3), Vector2(2.08165e-12, -10), Vector2(2.08165e-12, -10), Vector2(2.08165e-12, -3), Vector2(2.08165e-12, -3)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.3, 0.5, 0.7, 0.9, 1, 1.2, 1.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
@@ -89,7 +65,7 @@ resource_name = "idle"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("Sprite2D:offset")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -125,23 +101,23 @@ script = ExtResource("1_8ygen")
 npcSprites = Array[CompressedTexture2D]([ExtResource("2_tqrcb"), ExtResource("3_ttwgq"), ExtResource("4_87j3i"), ExtResource("1_w7efx"), ExtResource("6_rbhxh"), ExtResource("7_conac"), ExtResource("8_87vca"), ExtResource("9_mu278")])
 
 [node name="ActionInputPopup" parent="." instance=ExtResource("10_trrjq")]
-position = Vector2(0, -23)
+position = Vector2(8, -27)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -2)
+position = Vector2(8, -6)
 rotation = -1.5708
 texture = ExtResource("1_w7efx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, -5)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_ijui1")
-metadata/_edit_lock_ = true
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -18.0
-offset_top = -26.0
-offset_right = 18.0
-offset_bottom = -20.0
+offset_left = -10.0
+offset_top = -30.0
+offset_right = 26.0
+offset_bottom = -24.0
 theme_override_styles/background = ExtResource("11_b6s0i")
 theme_override_styles/fill = ExtResource("12_lxuo2")
 show_percentage = false

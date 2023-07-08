@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://drh7y8f4atts5"]
+[gd_scene load_steps=22 format=3 uid="uid://drh7y8f4atts5"]
 
 [ext_resource type="Texture2D" uid="uid://cxiuxbpe2a8r4" path="res://assets/images/background.png" id="1_t04jk"]
 [ext_resource type="Script" path="res://scenes/terrainSpawner.gd" id="2_wpjmv"]
@@ -13,6 +13,8 @@
 [ext_resource type="FontFile" uid="uid://dca4yd52w4b55" path="res://assets/monogram.ttf" id="10_w3cw7"]
 [ext_resource type="Script" path="res://scripts/energyBar.gd" id="11_olfv8"]
 [ext_resource type="Texture2D" uid="uid://bs74xfd7eb0u5" path="res://assets/images/ui/coin.png" id="11_wpu1c"]
+[ext_resource type="Script" path="res://scripts/depthDisplay.gd" id="14_e511j"]
+[ext_resource type="Script" path="res://scripts/speedDisplay.gd" id="15_lt5l3"]
 
 [sub_resource type="Animation" id="Animation_ebvuh"]
 resource_name = "hit"
@@ -66,7 +68,7 @@ script = ExtResource("2_wpjmv")
 [node name="Block0" parent="TerrainSpawner" instance=ExtResource("6_8184x")]
 
 [node name="Player" parent="." instance=ExtResource("6_wbp2b")]
-position = Vector2(112, 40)
+position = Vector2(198, 72)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2(2.08165e-12, 60)
@@ -187,6 +189,64 @@ offset_top = 21.0
 offset_right = 347.0
 offset_bottom = 37.0
 texture = ExtResource("11_wpu1c")
+
+[node name="DepthDisplay" type="Control" parent="UICanvas/UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("14_e511j")
+
+[node name="Label" type="Label" parent="UICanvas/UI/DepthDisplay"]
+layout_mode = 0
+offset_left = 324.0
+offset_top = 54.0
+offset_right = 396.0
+offset_bottom = 72.0
+theme_override_fonts/font = ExtResource("10_w3cw7")
+theme_override_font_sizes/font_size = 16
+text = "Depth(m)"
+horizontal_alignment = 1
+
+[node name="Depth" type="Label" parent="UICanvas/UI/DepthDisplay"]
+layout_mode = 0
+offset_left = 324.0
+offset_top = 64.0
+offset_right = 396.0
+offset_bottom = 93.0
+theme_override_fonts/font = ExtResource("10_w3cw7")
+theme_override_font_sizes/font_size = 32
+text = "900"
+horizontal_alignment = 1
+
+[node name="SpeedDisplay" type="Control" parent="UICanvas/UI"]
+anchors_preset = 0
+offset_top = 54.0
+offset_right = 40.0
+offset_bottom = 94.0
+script = ExtResource("15_lt5l3")
+
+[node name="Label" type="Label" parent="UICanvas/UI/SpeedDisplay"]
+layout_mode = 0
+offset_left = 324.0
+offset_top = 54.0
+offset_right = 396.0
+offset_bottom = 72.0
+theme_override_fonts/font = ExtResource("10_w3cw7")
+theme_override_font_sizes/font_size = 16
+text = "Speed(km/h)
+"
+horizontal_alignment = 1
+
+[node name="Speed" type="Label" parent="UICanvas/UI/SpeedDisplay"]
+layout_mode = 0
+offset_left = 324.0
+offset_top = 64.0
+offset_right = 396.0
+offset_bottom = 93.0
+theme_override_fonts/font = ExtResource("10_w3cw7")
+theme_override_font_sizes/font_size = 32
+text = "200"
+horizontal_alignment = 1
 
 [connection signal="addCoin" from="Player" to="UICanvas/UI/CoinCounter" method="_on_player_add_coin"]
 [connection signal="energyChanged" from="Player" to="UICanvas/UI/EnergyBar" method="_on_player_energy_changed"]

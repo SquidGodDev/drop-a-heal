@@ -25,6 +25,7 @@ const ACCELERATION = 15.0
 const FRICTION = 20.0
 const AIR_FRICTION = 3.0
 const JUMP_VELOCITY = -200.0
+const TERMINAL_VELOCITY = 1500.0
 
 var lastVelocity := 0.0
 var coyoteTimeActive := false
@@ -57,6 +58,8 @@ func _physics_process(delta):
 		else:
 			$Parachute.visible = false
 			velocity.y += gravity * delta
+			if velocity.y >= TERMINAL_VELOCITY:
+				velocity.y = TERMINAL_VELOCITY
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyoteTimeActive):

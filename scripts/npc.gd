@@ -2,7 +2,7 @@ extends Area2D
 
 @export var npcSprites: Array[CompressedTexture2D]
 
-@onready var playerHealSpeed = get_node("/root/GameData").getHealSpeed()
+@onready var playerHealSpeed = get_node("/root/GameData").healSpeed
 
 var touchingPlayer := false
 var HEAL_MAX := 100.0

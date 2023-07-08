@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://drh7y8f4atts5"]
+[gd_scene load_steps=17 format=3 uid="uid://drh7y8f4atts5"]
 
 [ext_resource type="Script" path="res://scripts/TerrainSpawner.gd" id="1_ikakl"]
 [ext_resource type="Texture2D" uid="uid://cxiuxbpe2a8r4" path="res://assets/images/background.png" id="1_t04jk"]
@@ -7,13 +7,34 @@
 [ext_resource type="PackedScene" uid="uid://c7yv7o1ky2au7" path="res://scenes/blocks/block_3.tscn" id="4_2obai"]
 [ext_resource type="PackedScene" uid="uid://bkflkgjapfywh" path="res://scenes/blocks/block_0.tscn" id="6_8184x"]
 [ext_resource type="PackedScene" uid="uid://8ftv3kwsnq6d" path="res://scenes/player.tscn" id="6_wbp2b"]
+[ext_resource type="Script" path="res://scripts/healthBar.gd" id="8_jqolc"]
+[ext_resource type="Texture2D" uid="uid://cm2uou1w00067" path="res://assets/images/ui/whitePixel.png" id="8_nu01b"]
+[ext_resource type="Texture2D" uid="uid://crtr4pfpc0xoc" path="res://assets/images/ui/heart.png" id="9_bd4vi"]
+[ext_resource type="Texture2D" uid="uid://rci20jx6kjeo" path="res://assets/images/ui/energy.png" id="10_mcodv"]
+[ext_resource type="Script" path="res://scripts/energyBar.gd" id="11_olfv8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_saj2p"]
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_78t6m"]
+bg_color = Color(0.294118, 0.827451, 0.321569, 1)
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f0on6"]
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bap08"]
+bg_color = Color(0.980392, 0.862745, 0.239216, 1)
+border_color = Color(1, 1, 1, 1)
 
 [node name="Main" type="Node2D"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="BackgroundCanvas" type="CanvasLayer" parent="."]
 layer = -128
 
-[node name="Background" type="Sprite2D" parent="CanvasLayer"]
+[node name="Background" type="Sprite2D" parent="BackgroundCanvas"]
 position = Vector2(198, 117)
 texture = ExtResource("1_t04jk")
 
@@ -31,3 +52,83 @@ offset = Vector2(2.08165e-12, 60)
 limit_left = 0
 limit_right = 396
 position_smoothing_enabled = true
+
+[node name="UICanvas" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="UICanvas"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 396.0
+offset_bottom = 216.0
+
+[node name="HealthBar" type="Control" parent="UICanvas/UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_jqolc")
+
+[node name="Heart" type="TextureRect" parent="UICanvas/UI/HealthBar"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 13.0
+offset_right = 31.0
+offset_bottom = 29.0
+texture = ExtResource("9_bd4vi")
+
+[node name="HealthBarBackground" type="TextureRect" parent="UICanvas/UI/HealthBar"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 41.0
+offset_right = 31.0
+offset_bottom = 209.0
+texture = ExtResource("8_nu01b")
+
+[node name="HealthBar" type="ProgressBar" parent="UICanvas/UI/HealthBar"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 43.0
+offset_right = 29.0
+offset_bottom = 206.0
+theme_override_styles/background = SubResource("StyleBoxFlat_saj2p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_78t6m")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="EnergyBar" type="Control" parent="UICanvas/UI"]
+anchors_preset = 0
+offset_left = 44.0
+offset_top = 41.0
+offset_right = 60.0
+offset_bottom = 209.0
+script = ExtResource("11_olfv8")
+
+[node name="Energy" type="TextureRect" parent="UICanvas/UI/EnergyBar"]
+layout_mode = 0
+offset_top = -29.0
+offset_right = 16.0
+offset_bottom = -13.0
+texture = ExtResource("10_mcodv")
+
+[node name="EnergyBarBackground" type="TextureRect" parent="UICanvas/UI/EnergyBar"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 168.0
+texture = ExtResource("8_nu01b")
+metadata/_edit_lock_ = true
+
+[node name="EnergyBar" type="ProgressBar" parent="UICanvas/UI/EnergyBar"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 14.0
+offset_bottom = 165.0
+theme_override_styles/background = SubResource("StyleBoxFlat_f0on6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bap08")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+metadata/_edit_lock_ = true
+
+[connection signal="energyChanged" from="Player" to="UICanvas/UI/EnergyBar" method="_on_player_energy_changed"]
+[connection signal="healthChanged" from="Player" to="UICanvas/UI/HealthBar" method="_on_player_health_changed"]

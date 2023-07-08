@@ -10,24 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://cmv33psevq8ml" path="res://assets/images/npcs/ranger.png" id="8_87vca"]
 [ext_resource type="Texture2D" uid="uid://cqvgal2tqnpon" path="res://assets/images/npcs/wizard.png" id="9_mu278"]
 [ext_resource type="PackedScene" uid="uid://cf30ya1mnhrue" path="res://scenes/ui/action_input_popup.tscn" id="10_trrjq"]
+[ext_resource type="StyleBox" uid="uid://c3ntqaispjb2g" path="res://scenes/ui/red.tres" id="11_b6s0i"]
+[ext_resource type="StyleBox" uid="uid://kuhfgg4yt7yv" path="res://scenes/ui/green.tres" id="12_lxuo2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ijui1"]
 height = 26.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2266"]
-bg_color = Color(1, 0.207843, 0, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wtn2p"]
-bg_color = Color(0, 0.956863, 0.215686, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_tqqx0"]
 resource_name = "healed"
@@ -155,8 +142,8 @@ offset_left = -18.0
 offset_top = -26.0
 offset_right = 18.0
 offset_bottom = -20.0
-theme_override_styles/background = SubResource("StyleBoxFlat_n2266")
-theme_override_styles/fill = SubResource("StyleBoxFlat_wtn2p")
+theme_override_styles/background = ExtResource("11_b6s0i")
+theme_override_styles/fill = ExtResource("12_lxuo2")
 show_percentage = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

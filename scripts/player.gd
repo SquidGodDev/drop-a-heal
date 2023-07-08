@@ -1,11 +1,28 @@
 extends CharacterBody2D
 
+signal healthChanged(amount)
+signal energyChanged(amount)
+
+@onready var gameData: GameData = get_node("/root/GameData")
+
+@onready var maxHealth = gameData.maxHealth
+@onready var health = maxHealth
+
+@onready var maxEnergy = gameData.maxEnergy
+@onready var energy = maxEnergy
+
+@onready var energyDrainSpeed = gameData.energyDrainSpeed
+
+@onready var fallDamageSpeed = gameData.fallDamageSpeed
+@onready var fallDamageScaling = gameData.fallDamageScaling
+
 const SPEED = 100.0
 const ACCELERATION = 15.0
 const FRICTION = 20.0
 const AIR_FRICTION = 3.0
 const JUMP_VELOCITY = -200.0
 
+var lastVelocity := 0
 var coyoteTimeActive := false
 var justLeftGround := false
 
@@ -14,12 +31,15 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 const PARACHUTE_SPEED := 30.0
 const PARACHUTE_AIR_FRICTION := 20.0
 
-
 func _physics_process(delta):
 	# Add the gravity.
 	if is_on_floor():
-		coyoteTimeActive = true
-		justLeftGround = true
+		if not justLeftGround:
+			coyoteTimeActive = true
+			justLeftGround = true
+			if lastVelocity >= fallDamageSpeed:
+				var fallDamage = (lastVelocity - fallDamageSpeed) * fallDamageScaling
+				damage(fallDamage)
 		$CoyoteTimer.stop()
 		if $Parachute.visible and not Input.is_action_pressed("jump"):
 			$Parachute.visible = false
@@ -33,7 +53,6 @@ func _physics_process(delta):
 		else:
 			$Parachute.visible = false
 			velocity.y += gravity * delta
-	
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyoteTimeActive):
@@ -56,9 +75,27 @@ func _physics_process(delta):
 			velocity.x = move_toward(velocity.x, 0, FRICTION)
 		else:
 			velocity.x = move_toward(velocity.x, 0, AIR_FRICTION)
+	
+	lastVelocity = velocity.y
 
 	move_and_slide()
 
+func _process(delta):
+	energy -= delta * energyDrainSpeed
+	energyChanged.emit(energy)
+	if energy <= 0:
+		endRun()
+		pass
+
+func damage(amount):
+	health -= amount
+	healthChanged.emit(health)
+	if health <= 0:
+		endRun()
+
+func endRun():
+	# TODO
+	pass
 
 func _on_coyote_timer_timeout():
 	coyoteTimeActive = false

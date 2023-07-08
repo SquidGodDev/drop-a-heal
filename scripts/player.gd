@@ -22,7 +22,7 @@ const FRICTION = 20.0
 const AIR_FRICTION = 3.0
 const JUMP_VELOCITY = -200.0
 
-var lastVelocity := 0
+var lastVelocity := 0.0
 var coyoteTimeActive := false
 var justLeftGround := false
 

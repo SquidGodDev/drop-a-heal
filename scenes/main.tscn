@@ -27,7 +27,7 @@ blocks = Array[PackedScene]([ExtResource("2_07cnu"), ExtResource("3_0y0qq"), Ext
 position = Vector2(112, 40)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-offset = Vector2(2.08165e-12, 80)
+offset = Vector2(2.08165e-12, 60)
 limit_left = 0
 limit_right = 396
 position_smoothing_enabled = true

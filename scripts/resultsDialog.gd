@@ -25,6 +25,8 @@ func runEnded():
 	var npcCount = npcCounter.getNPCCount()
 	var npcCoins = coinsPerHeal * npcCount
 	var depth = floor(depthDisplay.getDepth())
+	if depth > gameData.maxDepth:
+		gameData.maxDepth = depth
 	$NPCCount.text = "x" + str(npcCount)
 	$DepthBonus.text = "Depth: %dm" % depth
 	var depthCoins = ceil(DEPTH_BONUS * depth)

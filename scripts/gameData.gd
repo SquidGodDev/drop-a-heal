@@ -26,5 +26,7 @@ var energyLevel := 0
 var healLevel := 0
 var fallDamageLevel := 0
 
+var maxDepth := 0
+
 func _ready():
 	randomize()

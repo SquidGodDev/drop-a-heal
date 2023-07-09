@@ -35,7 +35,7 @@ var blocks = [
 
 @onready var player = $"../Player"
 
-const BLOCK_REMOVE_DIST := 1000.0
+const BLOCK_REMOVE_DIST := 1200.0
 const BLOCK_SPAWN_DIST := 200.0
 var nextSpawnY: float
 

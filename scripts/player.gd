@@ -114,6 +114,12 @@ func updateEnergy(newEnergy):
 func npcHealed():
 	addCoin.emit(coinsPerHeal)
 
+func heal(amount):
+	health += amount
+	if health >= maxHealth:
+		health = maxHealth
+	healthChanged.emit(health)
+
 func damage(amount):
 	if invincible:
 		return

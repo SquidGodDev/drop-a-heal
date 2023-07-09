@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c3wljtwika5ev"]
+[gd_scene load_steps=13 format=3 uid="uid://c3wljtwika5ev"]
 
 [ext_resource type="Script" path="res://scripts/block.gd" id="1_ou8m0"]
 [ext_resource type="Texture2D" uid="uid://dnnsbfnatx1sl" path="res://assets/images/rock_packed.png" id="2_fclac"]
@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://2hpjregdbjgy" path="res://scenes/hazards/spike3.tscn" id="3_lkms3"]
 [ext_resource type="PackedScene" uid="uid://b6dbxjuvp3j00" path="res://scenes/hazards/flippedTurret.tscn" id="4_mbvhe"]
 [ext_resource type="PackedScene" uid="uid://brcrb5xslrokn" path="res://scenes/hazards/barrel.tscn" id="5_267hg"]
+[ext_resource type="PackedScene" uid="uid://qutn54eiw6v2" path="res://scenes/npc.tscn" id="7_1mbl5"]
+[ext_resource type="PackedScene" uid="uid://bcht67vfdl0h5" path="res://scenes/enemies/bat.tscn" id="8_wfuc1"]
+[ext_resource type="PackedScene" uid="uid://4im7qq10anfl" path="res://scenes/pickups/energy.tscn" id="9_xitt8"]
+[ext_resource type="PackedScene" uid="uid://daovmcdsup154" path="res://scenes/pickups/health.tscn" id="10_qok0y"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_swf81"]
 texture = ExtResource("2_fclac")
@@ -175,3 +179,24 @@ position = Vector2(108, 180)
 
 [node name="Spike3" parent="." instance=ExtResource("3_lkms3")]
 position = Vector2(252, 486)
+
+[node name="NPC" parent="." instance=ExtResource("7_1mbl5")]
+position = Vector2(144, 180)
+
+[node name="Bat" parent="." instance=ExtResource("8_wfuc1")]
+position = Vector2(252, 360)
+
+[node name="Bat2" parent="." instance=ExtResource("8_wfuc1")]
+position = Vector2(108, 576)
+
+[node name="Bat3" parent="." instance=ExtResource("8_wfuc1")]
+position = Vector2(144, 432)
+
+[node name="Energy" parent="." instance=ExtResource("9_xitt8")]
+position = Vector2(234, 432)
+
+[node name="Health" parent="." instance=ExtResource("10_qok0y")]
+position = Vector2(144, 522)
+
+[node name="NPC2" parent="." instance=ExtResource("7_1mbl5")]
+position = Vector2(126, 630)

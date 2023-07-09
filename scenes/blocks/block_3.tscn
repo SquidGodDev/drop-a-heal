@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7yv7o1ky2au7"]
+[gd_scene load_steps=8 format=3 uid="uid://c7yv7o1ky2au7"]
 
 [ext_resource type="Texture2D" uid="uid://dnnsbfnatx1sl" path="res://assets/images/rock_packed.png" id="1_87lt2"]
 [ext_resource type="Script" path="res://scripts/block.gd" id="1_jia2k"]
+[ext_resource type="PackedScene" uid="uid://b7ut3nwruacxf" path="res://scenes/hazards/spike2.tscn" id="3_ik3bb"]
+[ext_resource type="PackedScene" uid="uid://qutn54eiw6v2" path="res://scenes/npc.tscn" id="4_bei0u"]
+[ext_resource type="PackedScene" uid="uid://daovmcdsup154" path="res://scenes/pickups/health.tscn" id="5_voq0i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_swf81"]
 texture = ExtResource("1_87lt2")
@@ -159,3 +162,21 @@ tile_set = SubResource("TileSet_nlqiw")
 cell_quadrant_size = 18
 format = 2
 layer_0/tile_data = PackedInt32Array(4, 458752, 1, 65540, 458752, 1, 131076, 458752, 1, 196612, 458752, 1, 786436, 458752, 1, 262148, 458752, 1, 327684, 458752, 1, 393220, 458752, 1, 458756, 458752, 1, 524292, 458752, 1, 589828, 458752, 1, 655364, 458752, 1, 720900, 458752, 1, 17, 458752, 1, 65553, 458752, 1, 786449, 458752, 1, 720913, 458752, 1, 655377, 458752, 1, 589841, 458752, 1, 524305, 458752, 1, 458769, 458752, 1, 393233, 458752, 1, 327697, 458752, 1, 262161, 458752, 1, 196625, 458752, 1, 131089, 458752, 1, 851972, 458752, 1, 917508, 458752, 1, 983044, 458752, 1, 1048580, 458752, 1, 1114116, 458752, 1, 1179652, 458752, 1, 1245188, 458752, 1, 1310724, 458752, 1, 1376260, 458752, 1, 851985, 458752, 1, 917521, 458752, 1, 983057, 458752, 1, 1048593, 458752, 1, 1114129, 458752, 1, 1179665, 458752, 1, 1245201, 458752, 1, 1310737, 458752, 1, 1376273, 458752, 1, 262153, 196608, 0, 262154, 196608, 0, 262155, 196608, 0, 262156, 196608, 0, 327693, 196608, 0, 327692, 196608, 0, 327691, 196608, 0, 327690, 196608, 0, 327689, 196608, 0, 327688, 196608, 0, 393225, 196608, 0, 393224, 196608, 0, 393223, 196608, 0, 393228, 196608, 0, 393229, 196608, 0, 393230, 196608, 0, 786448, 196608, 0, 786447, 196608, 0, 786446, 196608, 0, 851982, 196608, 0, 851981, 196608, 0, 786437, 196608, 0, 786438, 196608, 0, 786439, 196608, 0, 851976, 196608, 0, 851975, 196608, 0, 1179656, 196608, 0, 1114120, 196608, 0, 1114121, 196608, 0, 1114124, 196608, 0, 1114125, 196608, 0, 1179661, 196608, 0, 1114123, 196608, 0, 1114122, 196608, 0, 1179662, 196608, 0, 1179655, 196608, 0)
+
+[node name="Spike2" parent="." instance=ExtResource("3_ik3bb")]
+position = Vector2(180, 72)
+
+[node name="Spike3" parent="." instance=ExtResource("3_ik3bb")]
+position = Vector2(90, 216)
+
+[node name="Spike4" parent="." instance=ExtResource("3_ik3bb")]
+position = Vector2(270, 216)
+
+[node name="NPC" parent="." instance=ExtResource("4_bei0u")]
+position = Vector2(252, 108)
+
+[node name="NPC2" parent="." instance=ExtResource("4_bei0u")]
+position = Vector2(144, 234)
+
+[node name="Health" parent="." instance=ExtResource("5_voq0i")]
+position = Vector2(234, 270)

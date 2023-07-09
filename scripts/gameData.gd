@@ -15,10 +15,10 @@ var maxEnergy := baseMaxEnergy
 var healSpeed := baseHealSpeed
 var fallDamageSpeed := baseFallDamageSpeed
 
-var energyDrainSpeed := 0.4
+var energyDrainSpeed := .5
 var fallDamageMinimum := 2.0
 var fallDamageScaling := 0.02
-var coins := 100
+var coins := 0
 var coinsPerHeal := 3
 
 var healthLevel := 0

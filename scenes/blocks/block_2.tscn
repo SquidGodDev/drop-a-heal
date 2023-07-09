@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://chm0ui4tibe3"]
+[gd_scene load_steps=9 format=3 uid="uid://chm0ui4tibe3"]
 
 [ext_resource type="Script" path="res://scripts/block.gd" id="1_3b236"]
 [ext_resource type="Texture2D" uid="uid://dnnsbfnatx1sl" path="res://assets/images/rock_packed.png" id="1_vmqia"]
+[ext_resource type="PackedScene" uid="uid://qutn54eiw6v2" path="res://scenes/npc.tscn" id="3_dgxgp"]
+[ext_resource type="PackedScene" uid="uid://2hpjregdbjgy" path="res://scenes/hazards/spike3.tscn" id="4_1id57"]
+[ext_resource type="PackedScene" uid="uid://b7ut3nwruacxf" path="res://scenes/hazards/spike2.tscn" id="5_w5l45"]
+[ext_resource type="PackedScene" uid="uid://dhgijp02y4kot" path="res://scenes/enemies/cyclops.tscn" id="6_vqbx6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_swf81"]
 texture = ExtResource("1_vmqia")
@@ -159,3 +163,18 @@ tile_set = SubResource("TileSet_nlqiw")
 cell_quadrant_size = 18
 format = 2
 layer_0/tile_data = PackedInt32Array(4, 458752, 1, 65540, 458752, 1, 131076, 458752, 1, 196612, 458752, 1, 786436, 458752, 1, 262148, 458752, 1, 327684, 458752, 1, 393220, 458752, 1, 458756, 458752, 1, 524292, 458752, 1, 589828, 458752, 1, 655364, 458752, 1, 720900, 458752, 1, 17, 458752, 1, 65553, 458752, 1, 786449, 458752, 1, 720913, 458752, 1, 655377, 458752, 1, 589841, 458752, 1, 524305, 458752, 1, 458769, 458752, 1, 393233, 458752, 1, 327697, 458752, 1, 262161, 458752, 1, 196625, 458752, 1, 131089, 458752, 1, 851972, 458752, 1, 917508, 458752, 1, 983044, 458752, 1, 1048580, 458752, 1, 1114116, 458752, 1, 1179652, 458752, 1, 1245188, 458752, 1, 1310724, 458752, 1, 1376260, 458752, 1, 851985, 458752, 1, 917521, 458752, 1, 983057, 458752, 1, 1048593, 458752, 1, 1114129, 458752, 1, 1179665, 458752, 1, 1245201, 458752, 1, 1310737, 458752, 1, 1376273, 458752, 1, 196613, 196608, 0, 262149, 196608, 0, 262150, 196608, 0, 262151, 196608, 0, 262152, 196608, 0, 393232, 196608, 0, 393231, 196608, 0, 393230, 196608, 0, 393229, 196608, 0, 589829, 196608, 0, 589830, 196608, 0, 589831, 196608, 0, 655370, 196608, 0, 655371, 196608, 0, 655372, 196608, 0, 720908, 196608, 0, 720907, 196608, 0, 720906, 196608, 0, 720905, 196608, 0, 851982, 196608, 0, 917518, 196608, 0, 917519, 196608, 0, 917520, 196608, 0, 851983, 196608, 0, 917517, 196608, 0, 1114117, 196608, 0, 1114118, 196608, 0, 1114119, 196608, 0, 1114120, 196608, 0, 1179656, 196608, 0, 1179657, 196608, 0, 1179655, 196608, 0, 1179654, 196608, 0, 1179653, 196608, 0, 1310733, 196608, 0, 1310734, 196608, 0, 1310735, 196608, 0, 1310736, 196608, 0, 1310732, 196608, 0)
+
+[node name="NPC" parent="." instance=ExtResource("3_dgxgp")]
+position = Vector2(108, 162)
+
+[node name="NPC2" parent="." instance=ExtResource("3_dgxgp")]
+position = Vector2(270, 360)
+
+[node name="Spike3" parent="." instance=ExtResource("4_1id57")]
+position = Vector2(108, 306)
+
+[node name="Spike2" parent="." instance=ExtResource("5_w5l45")]
+position = Vector2(180, 180)
+
+[node name="Cyclops" parent="." instance=ExtResource("6_vqbx6")]
+position = Vector2(252, 108)

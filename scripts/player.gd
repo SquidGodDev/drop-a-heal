@@ -60,6 +60,8 @@ func _physics_process(delta):
 			$CoyoteTimer.start()
 		if not Input.is_action_just_pressed("jump") and Input.is_action_pressed("jump") and velocity.y >= 0:
 			velocity.y = move_toward(velocity.y, PARACHUTE_SPEED, PARACHUTE_AIR_FRICTION)
+			if not $Parachute.visible:
+				$ParachuteSound.play()
 			$Parachute.visible = true
 		else:
 			$Parachute.visible = false
@@ -70,6 +72,7 @@ func _physics_process(delta):
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyoteTimeActive):
 		velocity.y = JUMP_VELOCITY
+		$JumpSound.play()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -97,6 +100,7 @@ func _process(delta):
 	removeEnergy(delta * energyDrainSpeed)
 
 func addEnergy(amount):
+	$PickupSound.play()
 	updateEnergy(energy + amount)
 	
 func removeEnergy(amount):
@@ -116,6 +120,7 @@ func npcHealed():
 	addNPC.emit()
 
 func heal(amount):
+	$PickupSound.play()
 	health += amount
 	if health >= maxHealth:
 		health = maxHealth
@@ -124,6 +129,7 @@ func heal(amount):
 func damage(amount):
 	if invincible or dead:
 		return
+	$HurtSound.play()
 	health -= amount
 	healthChanged.emit(health)
 	$PlayerSprite.self_modulate = Color(1, 0, 0, 1)
@@ -136,6 +142,7 @@ func endRun():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("dead")
 	dead = true
+	$DieSound.play()
 	runEnded.emit()
 
 func _on_coyote_timer_timeout():

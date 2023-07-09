@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://08mdyibxbg6x"
+path="res://.godot/imported/healed.sfxr-a0c7dc7684ed03e46db5ba27057d6a75.sample"
+
+[deps]
+
+source_file="res://assets/sfx/healed.sfxr"
+dest_files=["res://.godot/imported/healed.sfxr-a0c7dc7684ed03e46db5ba27057d6a75.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

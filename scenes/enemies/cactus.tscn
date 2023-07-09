@@ -1,15 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://3uyanmlo5o5q"]
+[gd_scene load_steps=9 format=3 uid="uid://3uyanmlo5o5q"]
 
 [ext_resource type="Script" path="res://scripts/cactus.gd" id="1_j5ko1"]
 [ext_resource type="Texture2D" uid="uid://ghtgls1i0iff" path="res://assets/images/hazards/circle.png" id="1_r1q3x"]
 [ext_resource type="Texture2D" uid="uid://dg3bf0cpp6cgu" path="res://assets/images/enemies/cactus.png" id="2_g7v6b"]
+[ext_resource type="AudioStream" uid="uid://cgiv6y7bi3glm" path="res://assets/sfx/cactus.sfxr" id="4_0mgqo"]
 
 [sub_resource type="Curve" id="Curve_e75s2"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_njoyr"]
-radius = 10.0
 height = 36.0
 
 [sub_resource type="Animation" id="Animation_ovxaw"]
@@ -74,6 +74,11 @@ autoplay = "idle"
 libraries = {
 "": SubResource("AnimationLibrary_y0g3g")
 }
+
+[node name="CactusSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_0mgqo")
+max_distance = 500.0
+attenuation = 3.0
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]

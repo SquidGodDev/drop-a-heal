@@ -1,7 +1,8 @@
-[gd_scene load_steps=27 format=3 uid="uid://drh7y8f4atts5"]
+[gd_scene load_steps=29 format=3 uid="uid://drh7y8f4atts5"]
 
 [ext_resource type="Texture2D" uid="uid://cxiuxbpe2a8r4" path="res://assets/images/background.png" id="1_t04jk"]
 [ext_resource type="Script" path="res://scenes/terrainSpawner.gd" id="2_wpjmv"]
+[ext_resource type="AudioStream" uid="uid://bhoekb3gye3fg" path="res://assets/music/DarkMusicFinal.wav" id="5_jrewh"]
 [ext_resource type="PackedScene" uid="uid://bkflkgjapfywh" path="res://scenes/blocks/block_0.tscn" id="6_8184x"]
 [ext_resource type="PackedScene" uid="uid://8ftv3kwsnq6d" path="res://scenes/player.tscn" id="6_wbp2b"]
 [ext_resource type="Script" path="res://scripts/healthBar.gd" id="8_jqolc"]
@@ -18,6 +19,7 @@
 [ext_resource type="Script" path="res://scripts/resultsDialog.gd" id="15_ltp3x"]
 [ext_resource type="PackedScene" uid="uid://dy5sic2osrh6w" path="res://scenes/ui/scene_transition_rect.tscn" id="15_yhhyg"]
 [ext_resource type="Texture2D" uid="uid://g0j4ycgva7mj" path="res://assets/images/npcs/knight3.png" id="16_sv1jt"]
+[ext_resource type="AudioStream" uid="uid://djhww5305uqg6" path="res://assets/sfx/return.sfxr" id="18_co1a3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_saj2p"]
 bg_color = Color(0, 0, 0, 1)
@@ -120,6 +122,10 @@ offset = Vector2(2.08165e-12, 60)
 limit_left = 0
 limit_right = 396
 position_smoothing_enabled = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_jrewh")
+autoplay = true
 
 [node name="UICanvas" type="CanvasLayer" parent="."]
 
@@ -385,6 +391,10 @@ texture = ExtResource("11_wpu1c")
 libraries = {
 "": SubResource("AnimationLibrary_h0don")
 }
+
+[node name="ExitSound" type="AudioStreamPlayer" parent="UICanvas/UI/ResultsDialog"]
+stream = ExtResource("18_co1a3")
+volume_db = -4.0
 
 [node name="SceneTransitionRect" parent="UICanvas" instance=ExtResource("15_yhhyg")]
 next_scene_path = "res://scenes/surface/surface.tscn"

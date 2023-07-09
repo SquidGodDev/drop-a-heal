@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://ct3cbnpgo4btn"
+path="res://.godot/imported/error.sfxr-8f70895ef6e9d233eecedc5e4dcbc1fc.sample"
+
+[deps]
+
+source_file="res://assets/sfx/error.sfxr"
+dest_files=["res://.godot/imported/error.sfxr-8f70895ef6e9d233eecedc5e4dcbc1fc.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

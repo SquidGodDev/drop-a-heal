@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ihjinxjyvl81"]
+[gd_scene load_steps=5 format=3 uid="uid://ihjinxjyvl81"]
 
 [ext_resource type="Texture2D" uid="uid://dyvxhomsedyum" path="res://assets/images/hazards/turret.png" id="1_oi2yv"]
 [ext_resource type="Script" path="res://scripts/turret.gd" id="2_2wj6m"]
 [ext_resource type="PackedScene" uid="uid://3m7ow0rqjl8r" path="res://scenes/hazards/projectile.tscn" id="3_1le7e"]
+[ext_resource type="AudioStream" uid="uid://d1sr1yuwb6plm" path="res://assets/sfx/shoot.sfxr" id="4_38jcn"]
 
 [node name="Turret" type="Sprite2D"]
 texture = ExtResource("1_oi2yv")
@@ -15,5 +16,10 @@ position = Vector2(-7, -6)
 
 [node name="ShootTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_38jcn")
+max_distance = 500.0
+attenuation = 3.24901
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

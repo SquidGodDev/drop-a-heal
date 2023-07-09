@@ -16,3 +16,4 @@ func _on_shoot_timer_timeout():
 	projectileInstance.initialize(speed, projectileDamage)
 	projectileInstance.position = $ShootPoint.position
 	add_child(projectileInstance)
+	$ShootSound.play()

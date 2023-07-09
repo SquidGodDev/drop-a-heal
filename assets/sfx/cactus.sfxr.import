@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://cgiv6y7bi3glm"
+path="res://.godot/imported/cactus.sfxr-017c6bb516c9332072241b835237467e.sample"
+
+[deps]
+
+source_file="res://assets/sfx/cactus.sfxr"
+dest_files=["res://.godot/imported/cactus.sfxr-017c6bb516c9332072241b835237467e.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

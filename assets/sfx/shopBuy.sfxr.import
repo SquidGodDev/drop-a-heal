@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://eucuogm66m2h"
+path="res://.godot/imported/shopBuy.sfxr-8ea41860bf99406888d9ffabe060306f.sample"
+
+[deps]
+
+source_file="res://assets/sfx/shopBuy.sfxr"
+dest_files=["res://.godot/imported/shopBuy.sfxr-8ea41860bf99406888d9ffabe060306f.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

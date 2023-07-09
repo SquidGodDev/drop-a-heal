@@ -1,8 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://8ftv3kwsnq6d"]
+[gd_scene load_steps=18 format=3 uid="uid://8ftv3kwsnq6d"]
 
 [ext_resource type="Texture2D" uid="uid://dyrmtokrt1wfv" path="res://assets/images/player.png" id="1_4etm8"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_7dt1v"]
 [ext_resource type="Texture2D" uid="uid://c8q8ijun1dnyy" path="res://assets/images/parachute.png" id="2_3t436"]
+[ext_resource type="AudioStream" uid="uid://2i0mj4rjpf0e" path="res://assets/sfx/hurt.sfxr" id="4_6du1u"]
+[ext_resource type="AudioStream" uid="uid://bej14v8eui7xj" path="res://assets/sfx/jump.sfxr" id="5_xk6su"]
+[ext_resource type="AudioStream" uid="uid://d0g76a0n10k67" path="res://assets/sfx/parachute.sfxr" id="6_j1u5p"]
+[ext_resource type="AudioStream" uid="uid://cepbke8bk32tf" path="res://assets/sfx/pickup.sfxr" id="7_rxflr"]
+[ext_resource type="AudioStream" uid="uid://cr0orqjb22qla" path="res://assets/sfx/die.sfxr" id="8_hrw2b"]
 
 [sub_resource type="Animation" id="Animation_b5mgt"]
 length = 0.001
@@ -187,6 +192,7 @@ libraries = {
 }
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
+rotation = 0.174533
 texture = ExtResource("1_4etm8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -204,6 +210,23 @@ wait_time = 0.1
 [node name="HitFlashTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_6du1u")
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_xk6su")
+volume_db = -4.0
+
+[node name="ParachuteSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_j1u5p")
+volume_db = -5.605
+
+[node name="PickupSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_rxflr")
+
+[node name="DieSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_hrw2b")
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="HitFlashTimer" to="." method="_on_hit_flash_timer_timeout"]

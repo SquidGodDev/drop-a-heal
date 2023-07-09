@@ -10,6 +10,7 @@ func _on_detection_area_body_entered(body):
 		$DetectionArea.set_deferred("monitoring", false)
 		$ExplosionTimer.start(EXPLOSION_WAIT_TIME)
 		$FuseParticles.emitting = true
+		$FuseSound.play()
 
 func _on_explosion_area_body_entered(body):
 	if body.name == "Player":
@@ -22,6 +23,7 @@ func _on_explosion_area_body_exited(body):
 func _on_explosion_timer_timeout():
 	if player_body:
 		player_body.damage(EXPLOSION_DAMAGE)
+	$ExplosionSound.play()
 	$ExplosionParticles.emitting = true
 	$FuseParticles.emitting = false
 	$Sprite2D.visible = false

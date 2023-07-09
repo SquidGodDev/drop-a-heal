@@ -51,11 +51,12 @@ func buyUpgrade():
 	if getLevel() >= MAX_LEVEL:
 		return
 	if gameData.coins >= getCost():
+		$BuySound.play()
 		gameData.coins -= getCost()
 		incrementLevel()
 		setValues(null, getLevel())
 	else:
-		# Fail
+		$ErrorSound.play()
 		pass
 
 func getCost():
@@ -92,6 +93,7 @@ func calculateCost(level):
 
 func _on_area_2d_body_entered(body):
 	if body.name == "Player":
+		$AlertSound.play()
 		$CanvasLayer.visible = true
 
 func _on_area_2d_body_exited(body):

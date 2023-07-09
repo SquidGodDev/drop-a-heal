@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://brcrb5xslrokn"]
+[gd_scene load_steps=10 format=3 uid="uid://brcrb5xslrokn"]
 
 [ext_resource type="Script" path="res://scripts/barrel.gd" id="1_q58tt"]
 [ext_resource type="Texture2D" uid="uid://ccb75k8ipijv2" path="res://assets/images/hazards/barrel.png" id="1_t2ove"]
 [ext_resource type="Texture2D" uid="uid://ghtgls1i0iff" path="res://assets/images/hazards/circle.png" id="2_uoahn"]
+[ext_resource type="AudioStream" uid="uid://b1eannwi5cehn" path="res://assets/sfx/fuse.sfxr" id="4_c7ivw"]
+[ext_resource type="AudioStream" uid="uid://bg0wrep1d7maq" path="res://assets/sfx/explosion.sfxr" id="5_5tjuw"]
 
 [sub_resource type="Curve" id="Curve_v68ar"]
 _data = [Vector2(0.00757932, 0.484118), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -86,6 +88,17 @@ damping_max = 150.0
 scale_amount_min = 0.3
 scale_amount_curve = SubResource("Curve_e5ulm")
 color = Color(1, 0.117647, 0, 1)
+
+[node name="FuseSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_c7ivw")
+volume_db = -4.0
+max_distance = 500.0
+attenuation = 3.0
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_5tjuw")
+max_distance = 500.0
+attenuation = 3.0
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_entered" from="ExplosionArea" to="." method="_on_explosion_area_body_entered"]

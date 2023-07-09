@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://qutn54eiw6v2"]
+[gd_scene load_steps=21 format=3 uid="uid://qutn54eiw6v2"]
 
 [ext_resource type="Script" path="res://scripts/npc.gd" id="1_8ygen"]
 [ext_resource type="Texture2D" uid="uid://dl7dr5av04plj" path="res://assets/images/npcs/knight1.png" id="1_w7efx"]
@@ -12,6 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://cf30ya1mnhrue" path="res://scenes/ui/action_input_popup.tscn" id="10_trrjq"]
 [ext_resource type="StyleBox" uid="uid://c3ntqaispjb2g" path="res://scenes/ui/red.tres" id="11_b6s0i"]
 [ext_resource type="StyleBox" uid="uid://kuhfgg4yt7yv" path="res://scenes/ui/green.tres" id="12_lxuo2"]
+[ext_resource type="AudioStream" uid="uid://baoistytnd50h" path="res://assets/sfx/alert.sfxr" id="13_mcgki"]
+[ext_resource type="AudioStream" uid="uid://cxjovhbh8wnd4" path="res://assets/sfx/healStart.sfxr" id="14_qtyev"]
+[ext_resource type="AudioStream" uid="uid://08mdyibxbg6x" path="res://assets/sfx/healed.sfxr" id="15_sc2a1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ijui1"]
 height = 26.0
@@ -127,6 +130,15 @@ autoplay = "idle"
 libraries = {
 "": SubResource("AnimationLibrary_olsec")
 }
+
+[node name="AlertSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_mcgki")
+
+[node name="HealStartSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_qtyev")
+
+[node name="HealedSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_sc2a1")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

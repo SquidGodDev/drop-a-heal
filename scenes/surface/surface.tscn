@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bgr5wbgkojpko"]
+[gd_scene load_steps=21 format=3 uid="uid://bgr5wbgkojpko"]
 
 [ext_resource type="Script" path="res://scripts/surface.gd" id="1_htnic"]
 [ext_resource type="Texture2D" uid="uid://yj1prgbi4n0j" path="res://assets/images/ui/surfaceBackground.png" id="1_xjkdo"]
@@ -11,8 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://bs74xfd7eb0u5" path="res://assets/images/ui/coin.png" id="7_wgk00"]
 [ext_resource type="PackedScene" uid="uid://ba4io8xmx26fw" path="res://scenes/surface/shop_item.tscn" id="7_ycs45"]
 [ext_resource type="FontFile" uid="uid://dca4yd52w4b55" path="res://assets/monogram.ttf" id="8_fkmhx"]
+[ext_resource type="AudioStream" uid="uid://ca4ct4432msld" path="res://assets/sfx/enterDungeon.sfxr" id="8_nglj1"]
 [ext_resource type="Texture2D" uid="uid://dph87cib7bmm4" path="res://assets/images/ui/instructions.png" id="8_ryace"]
 [ext_resource type="Script" path="res://scripts/maxDepth.gd" id="12_16rta"]
+[ext_resource type="AudioStream" uid="uid://l3brwudas1l2" path="res://assets/music/Juhani Junkala [Chiptune Adventures] 1. Stage 1.ogg" id="15_yj13l"]
 
 [sub_resource type="Gradient" id="Gradient_mlku8"]
 colors = PackedColorArray(0, 0, 0, 0.717647, 1, 1, 1, 0)
@@ -641,6 +643,10 @@ type = 3
 [node name="Player" parent="." instance=ExtResource("4_knd1s")]
 position = Vector2(126, 108)
 
+[node name="EnterSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_nglj1")
+volume_db = -4.0
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Instructions" type="TextureRect" parent="CanvasLayer"]
@@ -698,5 +704,10 @@ text = "Max Depth:
 
 [node name="SceneTransitionRect" parent="CanvasLayer" instance=ExtResource("6_51m54")]
 metadata/_edit_lock_ = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_yj13l")
+volume_db = -10.0
+autoplay = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

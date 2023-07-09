@@ -6,6 +6,7 @@ var player
 func _on_timer_timeout():
 	if player:
 		player.damage(DAMAGE)
+	$CactusSound.play()
 	$SpikeParticles.emitting = true
 
 func _on_hitbox_body_entered(body):

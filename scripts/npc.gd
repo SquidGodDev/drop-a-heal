@@ -24,8 +24,10 @@ func _process(delta):
 		return
 	if player:
 		if Input.is_action_pressed("down"):
-			$ActionInputPopup.visible = false
+			if not $ProgressBar.visible:
+				$HealStartSound.play()
 			$ProgressBar.visible = true
+			$ActionInputPopup.visible = false
 			healValue += delta * playerHealSpeed
 			$ProgressBar.value = $ProgressBar.max_value * (healValue / HEAL_MAX)
 			if healValue >= HEAL_MAX:
@@ -34,12 +36,14 @@ func _process(delta):
 				$ActionInputPopup.visible = false
 				$ProgressBar.visible = false
 				player.npcHealed()
+				$HealedSound.play()
 		else:
 			$ActionInputPopup.visible = true
 			$ProgressBar.visible = false
 
 func _on_body_entered(body):
 	if body.name == "Player":
+		$AlertSound.play()
 		player = body
 
 func _on_body_exited(body):

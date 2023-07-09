@@ -18,6 +18,7 @@ func _ready():
 func _process(_delta):
 	if displayVisible:
 		if Input.is_action_just_pressed("down") or Input.is_action_just_pressed("jump"):
+			$ExitSound.play()
 			sceneTransition.transition_to()
 
 func runEnded():

@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://2i0mj4rjpf0e"
+path="res://.godot/imported/hurt.sfxr-bd414d3fc1c7582c685384834d347a9d.sample"
+
+[deps]
+
+source_file="res://assets/sfx/hurt.sfxr"
+dest_files=["res://.godot/imported/hurt.sfxr-bd414d3fc1c7582c685384834d347a9d.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

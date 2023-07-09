@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bgr5wbgkojpko"]
+[gd_scene load_steps=18 format=3 uid="uid://bgr5wbgkojpko"]
 
 [ext_resource type="Script" path="res://scripts/surface.gd" id="1_htnic"]
 [ext_resource type="Texture2D" uid="uid://yj1prgbi4n0j" path="res://assets/images/ui/surfaceBackground.png" id="1_xjkdo"]
@@ -7,6 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://8ftv3kwsnq6d" path="res://scenes/player.tscn" id="4_knd1s"]
 [ext_resource type="Texture2D" uid="uid://cq62hxncpj68u" path="res://assets/images/surface/wellBackground.png" id="5_v52y7"]
 [ext_resource type="PackedScene" uid="uid://dy5sic2osrh6w" path="res://scenes/ui/scene_transition_rect.tscn" id="6_51m54"]
+[ext_resource type="Script" path="res://scripts/coinCounter.gd" id="7_rff5k"]
+[ext_resource type="Texture2D" uid="uid://bs74xfd7eb0u5" path="res://assets/images/ui/coin.png" id="7_wgk00"]
+[ext_resource type="PackedScene" uid="uid://ba4io8xmx26fw" path="res://scenes/surface/shop_item.tscn" id="7_ycs45"]
+[ext_resource type="FontFile" uid="uid://dca4yd52w4b55" path="res://assets/monogram.ttf" id="8_fkmhx"]
+[ext_resource type="Texture2D" uid="uid://dph87cib7bmm4" path="res://assets/images/ui/instructions.png" id="8_ryace"]
 
 [sub_resource type="Gradient" id="Gradient_mlku8"]
 colors = PackedColorArray(0, 0, 0, 0.717647, 1, 1, 1, 0)
@@ -608,9 +613,6 @@ cell_quadrant_size = 18
 format = 2
 layer_0/tile_data = PackedInt32Array(524294, 458752, 1, 589830, 458752, 1, 655366, 458752, 1, 720902, 458752, 1, 786438, 458752, 1, 524291, 458752, 1, 589827, 458752, 1, 655363, 458752, 1, 720899, 458752, 1, 786435, 458752, 1, 458755, 196608, 0, 458754, 196608, 0, 458758, 196608, 0, 458759, 196608, 0, 393216, 196608, 3, 196608, 196608, 3, 0, 196608, 3, 851974, 458752, 1, 917510, 458752, 1, 983046, 458752, 1, 851971, 458752, 1, 917507, 458752, 1, 983043, 458752, 1, 1048579, 458752, 1, 1048580, 458752, 1, 1048581, 458752, 1, 1048582, 458752, 1)
 
-[node name="Player" parent="." instance=ExtResource("4_knd1s")]
-position = Vector2(180, 127)
-
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(90, 270)
 collision_layer = 0
@@ -620,8 +622,59 @@ collision_mask = 2
 position = Vector2(0, -27)
 shape = SubResource("RectangleShape2D_kvfta")
 
+[node name="ShopItem" parent="." instance=ExtResource("7_ycs45")]
+position = Vector2(162, 144)
+
+[node name="ShopItem2" parent="." instance=ExtResource("7_ycs45")]
+position = Vector2(198, 144)
+type = 1
+
+[node name="ShopItem3" parent="." instance=ExtResource("7_ycs45")]
+position = Vector2(234, 144)
+type = 2
+
+[node name="ShopItem4" parent="." instance=ExtResource("7_ycs45")]
+position = Vector2(270, 144)
+type = 3
+
+[node name="Player" parent="." instance=ExtResource("4_knd1s")]
+position = Vector2(126, 108)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Instructions" type="TextureRect" parent="CanvasLayer"]
+offset_left = 18.0
+offset_top = 7.0
+offset_right = 116.0
+offset_bottom = 60.0
+texture = ExtResource("8_ryace")
+
+[node name="CoinCounter" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 342.0
+offset_right = 382.0
+offset_bottom = 40.0
+script = ExtResource("7_rff5k")
+
+[node name="Coin" type="TextureRect" parent="CanvasLayer/CoinCounter"]
+layout_mode = 0
+offset_left = -21.0
+offset_top = 7.0
+offset_right = -5.0
+offset_bottom = 23.0
+texture = ExtResource("7_wgk00")
+
+[node name="Label" type="Label" parent="CanvasLayer/CoinCounter"]
+layout_mode = 0
+offset_left = -2.0
+offset_right = 52.0
+offset_bottom = 29.0
+theme_override_fonts/font = ExtResource("8_fkmhx")
+theme_override_font_sizes/font_size = 32
+text = "0"
+
 [node name="SceneTransitionRect" parent="CanvasLayer" instance=ExtResource("6_51m54")]
+metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

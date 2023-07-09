@@ -2,8 +2,7 @@ extends CharacterBody2D
 
 signal healthChanged(amount)
 signal energyChanged(amount)
-signal addCoin(amount)
-signal hitFlash
+signal addNPC
 signal runEnded
 
 @onready var gameData: GameData = get_node("/root/GameData")
@@ -104,6 +103,8 @@ func removeEnergy(amount):
 	updateEnergy(energy - amount)
 	
 func updateEnergy(newEnergy):
+	if invincible or dead:
+		return
 	energy = newEnergy
 	if energy >= maxEnergy:
 		energy = maxEnergy
@@ -112,7 +113,7 @@ func updateEnergy(newEnergy):
 		endRun()
 
 func npcHealed():
-	addCoin.emit(coinsPerHeal)
+	addNPC.emit()
 
 func heal(amount):
 	health += amount
@@ -121,18 +122,21 @@ func heal(amount):
 	healthChanged.emit(health)
 
 func damage(amount):
-	if invincible:
+	if invincible or dead:
 		return
 	health -= amount
 	healthChanged.emit(health)
-	hitFlash.emit()
 	$PlayerSprite.self_modulate = Color(1, 0, 0, 1)
 	$HitFlashTimer.start()
 	if health <= 0:
 		endRun()
 
 func endRun():
-	pass
+	$Parachute.visible = false
+	$AnimationPlayer.stop()
+	$AnimationPlayer.play("dead")
+	dead = true
+	runEnded.emit()
 
 func _on_coyote_timer_timeout():
 	coyoteTimeActive = false

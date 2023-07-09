@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://8ftv3kwsnq6d"]
+[gd_scene load_steps=13 format=3 uid="uid://8ftv3kwsnq6d"]
 
 [ext_resource type="Texture2D" uid="uid://dyrmtokrt1wfv" path="res://assets/images/player.png" id="1_4etm8"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_7dt1v"]
@@ -144,9 +144,26 @@ tracks/2/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_26571"]
+resource_name = "dead"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -1.5708]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yjy5u"]
 _data = {
 "RESET": SubResource("Animation_o7rop"),
+"dead": SubResource("Animation_26571"),
 "idle": SubResource("Animation_y3npl"),
 "run": SubResource("Animation_yl5qx")
 }

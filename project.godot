@@ -29,6 +29,10 @@ window/size/window_height_override=1170
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gdfxr/plugin.cfg")
+
 [input]
 
 left={

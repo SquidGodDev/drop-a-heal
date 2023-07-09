@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://drh7y8f4atts5"]
+[gd_scene load_steps=27 format=3 uid="uid://drh7y8f4atts5"]
 
 [ext_resource type="Texture2D" uid="uid://cxiuxbpe2a8r4" path="res://assets/images/background.png" id="1_t04jk"]
 [ext_resource type="Script" path="res://scenes/terrainSpawner.gd" id="2_wpjmv"]
@@ -7,14 +7,17 @@
 [ext_resource type="Script" path="res://scripts/healthBar.gd" id="8_jqolc"]
 [ext_resource type="Texture2D" uid="uid://cm2uou1w00067" path="res://assets/images/ui/whitePixel.png" id="8_nu01b"]
 [ext_resource type="Texture2D" uid="uid://crtr4pfpc0xoc" path="res://assets/images/ui/heart.png" id="9_bd4vi"]
+[ext_resource type="Script" path="res://scripts/npcCounter.gd" id="10_hjqhr"]
 [ext_resource type="Texture2D" uid="uid://rci20jx6kjeo" path="res://assets/images/ui/energy.png" id="10_mcodv"]
 [ext_resource type="FontFile" uid="uid://dca4yd52w4b55" path="res://assets/monogram.ttf" id="10_w3cw7"]
 [ext_resource type="Script" path="res://scripts/energyBar.gd" id="11_olfv8"]
 [ext_resource type="Texture2D" uid="uid://bs74xfd7eb0u5" path="res://assets/images/ui/coin.png" id="11_wpu1c"]
-[ext_resource type="Script" path="res://coinCounter.gd" id="11_xkunr"]
 [ext_resource type="Script" path="res://scripts/depthDisplay.gd" id="14_e511j"]
+[ext_resource type="Texture2D" uid="uid://dlw1vx6y4wqx3" path="res://assets/images/ui/resultsDialog.png" id="15_d6toc"]
 [ext_resource type="Script" path="res://scripts/speedDisplay.gd" id="15_lt5l3"]
+[ext_resource type="Script" path="res://scripts/resultsDialog.gd" id="15_ltp3x"]
 [ext_resource type="PackedScene" uid="uid://dy5sic2osrh6w" path="res://scenes/ui/scene_transition_rect.tscn" id="15_yhhyg"]
+[ext_resource type="Texture2D" uid="uid://g0j4ycgva7mj" path="res://assets/images/npcs/knight3.png" id="16_sv1jt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_saj2p"]
 bg_color = Color(0, 0, 0, 1)
@@ -31,6 +34,69 @@ border_color = Color(1, 1, 1, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bap08"]
 bg_color = Color(0.980392, 0.862745, 0.239216, 1)
 border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_lo5nw"]
+resource_name = "darken"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.32549)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nbqru"]
+_data = {
+"darken": SubResource("Animation_lo5nw")
+}
+
+[sub_resource type="Animation" id="Animation_2ywf2"]
+resource_name = "enter"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(178, 300), Vector2(178, 88)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath(".:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(300, -0.25, 0, 0.6, 2.08165e-12, 88, -0.525, -1.32787, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h0don"]
+_data = {
+"enter": SubResource("Animation_2ywf2")
+}
 
 [node name="Main" type="Node2D"]
 
@@ -59,9 +125,11 @@ position_smoothing_enabled = true
 
 [node name="UI" type="Control" parent="UICanvas"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 396.0
-offset_bottom = 216.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HealthBar" type="Control" parent="UICanvas/UI"]
 anchors_preset = 0
@@ -132,13 +200,13 @@ fill_mode = 3
 show_percentage = false
 metadata/_edit_lock_ = true
 
-[node name="CoinCounter" type="Control" parent="UICanvas/UI"]
+[node name="NPCCounter" type="Control" parent="UICanvas/UI"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("11_xkunr")
+script = ExtResource("10_hjqhr")
 
-[node name="Label" type="Label" parent="UICanvas/UI/CoinCounter"]
+[node name="Label" type="Label" parent="UICanvas/UI/NPCCounter"]
 layout_mode = 0
 offset_left = 353.0
 offset_top = 14.0
@@ -148,13 +216,13 @@ theme_override_fonts/font = ExtResource("10_w3cw7")
 theme_override_font_sizes/font_size = 32
 text = "005"
 
-[node name="Coin" type="TextureRect" parent="UICanvas/UI/CoinCounter"]
+[node name="Coin" type="TextureRect" parent="UICanvas/UI/NPCCounter"]
 layout_mode = 0
 offset_left = 331.0
-offset_top = 21.0
+offset_top = 19.0
 offset_right = 347.0
 offset_bottom = 37.0
-texture = ExtResource("11_wpu1c")
+texture = ExtResource("16_sv1jt")
 
 [node name="DepthDisplay" type="Control" parent="UICanvas/UI"]
 anchors_preset = 0
@@ -214,9 +282,115 @@ theme_override_font_sizes/font_size = 32
 text = "200"
 horizontal_alignment = 1
 
+[node name="Darken" type="ColorRect" parent="UICanvas/UI"]
+self_modulate = Color(0, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UICanvas/UI/Darken"]
+libraries = {
+"": SubResource("AnimationLibrary_nbqru")
+}
+
+[node name="ResultsDialog" type="Control" parent="UICanvas/UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 192.0
+offset_right = 20.0
+offset_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_ltp3x")
+
+[node name="Background" type="TextureRect" parent="UICanvas/UI/ResultsDialog"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = -58.0
+offset_right = 49.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_d6toc")
+
+[node name="NPC" type="TextureRect" parent="UICanvas/UI/ResultsDialog"]
+layout_mode = 0
+offset_left = -7.0
+offset_top = -19.0
+offset_right = 9.0
+offset_bottom = -1.0
+texture = ExtResource("16_sv1jt")
+
+[node name="NPCCount" type="Label" parent="UICanvas/UI/ResultsDialog"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 8.0
+offset_top = -16.0
+offset_right = 43.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("10_w3cw7")
+text = "x5"
+
+[node name="DepthBonus" type="Label" parent="UICanvas/UI/ResultsDialog"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -34.0
+offset_top = 7.0
+offset_right = 32.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("10_w3cw7")
+text = "Depth: 500m"
+
+[node name="Total" type="Label" parent="UICanvas/UI/ResultsDialog"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -47.0
+offset_top = 43.0
+offset_right = 19.0
+offset_bottom = 59.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("10_w3cw7")
+text = "Total: 50"
+horizontal_alignment = 2
+
+[node name="Coin3" type="TextureRect" parent="UICanvas/UI/ResultsDialog"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 42.0
+offset_right = 58.0
+offset_bottom = 58.0
+texture = ExtResource("11_wpu1c")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UICanvas/UI/ResultsDialog"]
+libraries = {
+"": SubResource("AnimationLibrary_h0don")
+}
+
 [node name="SceneTransitionRect" parent="UICanvas" instance=ExtResource("15_yhhyg")]
 next_scene_path = "res://scenes/surface/surface.tscn"
+metadata/_edit_lock_ = true
 
-[connection signal="addCoin" from="Player" to="UICanvas/UI/CoinCounter" method="_on_player_add_coin"]
+[connection signal="addNPC" from="Player" to="UICanvas/UI/NPCCounter" method="_on_player_add_npc"]
 [connection signal="energyChanged" from="Player" to="UICanvas/UI/EnergyBar" method="_on_player_energy_changed"]
 [connection signal="healthChanged" from="Player" to="UICanvas/UI/HealthBar" method="_on_player_health_changed"]
+[connection signal="runEnded" from="Player" to="UICanvas/UI/ResultsDialog" method="_on_player_run_ended"]

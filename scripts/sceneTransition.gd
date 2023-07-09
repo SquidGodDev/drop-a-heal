@@ -8,6 +8,7 @@ extends ColorRect
 
 func _ready() -> void:
 	# Plays the animation backward to fade in
+	self_modulate.a = 1.0
 	_anim_player.play_backwards("fade")
 	
 func transition_to() -> void:

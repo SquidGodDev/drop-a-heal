@@ -4,6 +4,7 @@ signal healthChanged(amount)
 signal energyChanged(amount)
 signal addCoin(amount)
 signal hitFlash
+signal runEnded
 
 @onready var gameData: GameData = get_node("/root/GameData")
 
@@ -19,6 +20,10 @@ signal hitFlash
 @onready var fallDamageSpeed = gameData.fallDamageSpeed
 @onready var fallDamageScaling = gameData.fallDamageScaling
 @onready var coinsPerHeal = gameData.coinsPerHeal
+
+@onready var invincible = true if get_parent().name == "Surface" else false
+
+var dead := false
 
 const SPEED = 100.0
 const ACCELERATION = 15.0
@@ -37,6 +42,8 @@ const PARACHUTE_SPEED := 30.0
 const PARACHUTE_AIR_FRICTION := 20.0
 
 func _physics_process(delta):
+	if dead:
+		return
 	# Add the gravity.
 	if is_on_floor():
 		if not justLeftGround:
@@ -108,6 +115,8 @@ func npcHealed():
 	addCoin.emit(coinsPerHeal)
 
 func damage(amount):
+	if invincible:
+		return
 	health -= amount
 	healthChanged.emit(health)
 	hitFlash.emit()
@@ -117,7 +126,6 @@ func damage(amount):
 		endRun()
 
 func endRun():
-	# TODO
 	pass
 
 func _on_coyote_timer_timeout():

@@ -1,41 +1,20 @@
-[gd_scene load_steps=22 format=3 uid="uid://drh7y8f4atts5"]
+[gd_scene load_steps=20 format=3 uid="uid://drh7y8f4atts5"]
 
 [ext_resource type="Texture2D" uid="uid://cxiuxbpe2a8r4" path="res://assets/images/background.png" id="1_t04jk"]
 [ext_resource type="Script" path="res://scenes/terrainSpawner.gd" id="2_wpjmv"]
-[ext_resource type="Script" path="res://scripts/HitFlash.gd" id="6_64ho0"]
 [ext_resource type="PackedScene" uid="uid://bkflkgjapfywh" path="res://scenes/blocks/block_0.tscn" id="6_8184x"]
 [ext_resource type="PackedScene" uid="uid://8ftv3kwsnq6d" path="res://scenes/player.tscn" id="6_wbp2b"]
 [ext_resource type="Script" path="res://scripts/healthBar.gd" id="8_jqolc"]
 [ext_resource type="Texture2D" uid="uid://cm2uou1w00067" path="res://assets/images/ui/whitePixel.png" id="8_nu01b"]
 [ext_resource type="Texture2D" uid="uid://crtr4pfpc0xoc" path="res://assets/images/ui/heart.png" id="9_bd4vi"]
-[ext_resource type="Script" path="res://scenes/coinCounter.gd" id="10_kvdjf"]
 [ext_resource type="Texture2D" uid="uid://rci20jx6kjeo" path="res://assets/images/ui/energy.png" id="10_mcodv"]
 [ext_resource type="FontFile" uid="uid://dca4yd52w4b55" path="res://assets/monogram.ttf" id="10_w3cw7"]
 [ext_resource type="Script" path="res://scripts/energyBar.gd" id="11_olfv8"]
 [ext_resource type="Texture2D" uid="uid://bs74xfd7eb0u5" path="res://assets/images/ui/coin.png" id="11_wpu1c"]
+[ext_resource type="Script" path="res://coinCounter.gd" id="11_xkunr"]
 [ext_resource type="Script" path="res://scripts/depthDisplay.gd" id="14_e511j"]
 [ext_resource type="Script" path="res://scripts/speedDisplay.gd" id="15_lt5l3"]
-
-[sub_resource type="Animation" id="Animation_ebvuh"]
-resource_name = "hit"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:self_modulate")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 0, 0, 0), Color(1, 0, 0, 0.203922), Color(1, 0, 0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2x8rr"]
-_data = {
-"hit": SubResource("Animation_ebvuh")
-}
+[ext_resource type="PackedScene" uid="uid://dy5sic2osrh6w" path="res://scenes/ui/scene_transition_rect.tscn" id="15_yhhyg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_saj2p"]
 bg_color = Color(0, 0, 0, 1)
@@ -83,19 +62,6 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 396.0
 offset_bottom = 216.0
-
-[node name="HitFlash" type="TextureRect" parent="UICanvas/UI"]
-self_modulate = Color(1, 0, 0, 0)
-layout_mode = 0
-offset_right = 396.0
-offset_bottom = 234.0
-texture = ExtResource("8_nu01b")
-script = ExtResource("6_64ho0")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UICanvas/UI/HitFlash"]
-libraries = {
-"": SubResource("AnimationLibrary_2x8rr")
-}
 
 [node name="HealthBar" type="Control" parent="UICanvas/UI"]
 anchors_preset = 0
@@ -170,7 +136,7 @@ metadata/_edit_lock_ = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("10_kvdjf")
+script = ExtResource("11_xkunr")
 
 [node name="Label" type="Label" parent="UICanvas/UI/CoinCounter"]
 layout_mode = 0
@@ -248,7 +214,9 @@ theme_override_font_sizes/font_size = 32
 text = "200"
 horizontal_alignment = 1
 
+[node name="SceneTransitionRect" parent="UICanvas" instance=ExtResource("15_yhhyg")]
+next_scene_path = "res://scenes/surface/surface.tscn"
+
 [connection signal="addCoin" from="Player" to="UICanvas/UI/CoinCounter" method="_on_player_add_coin"]
 [connection signal="energyChanged" from="Player" to="UICanvas/UI/EnergyBar" method="_on_player_energy_changed"]
 [connection signal="healthChanged" from="Player" to="UICanvas/UI/HealthBar" method="_on_player_health_changed"]
-[connection signal="hitFlash" from="Player" to="UICanvas/UI/HitFlash" method="_on_player_hit_flash"]
